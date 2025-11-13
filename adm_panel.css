@@ -1,14 +1,43 @@
-/* --- Estilos Globais e Reset Básico --- */
+/* --- Reset e Estilos Globais --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --secondary: #f59e0b;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius: 8px;
+    --radius-lg: 12px;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: linear-gradient(135deg, rgb(9, 99, 43) 0%, #18aa6d 100%);
+    color: var(--gray-800);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* === LAYOUT PARA MOBILE (Default) === */
+.admin-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,38 +45,219 @@ body {
     padding: 1rem;
 }
 
-/* --- Container Principal --- */
 .admin-container {
-    background-color: white;
+    background: white;
     padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 450px;
-    border-top: 5px solid #007bff; /* Um detalhe de cor */
+    max-width: 480px;
+    position: relative;
+    overflow: hidden;
 }
 
+.admin-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+/* === LAYOUT PARA DESKTOP (768px+) - DISTRIBUIÇÃO OTIMIZADA === */
+@media screen and (min-width: 768px) {
+    .admin-wrapper {
+        padding: 3rem 2rem;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .admin-container {
+        max-width: 800px; /* Largura fixa ideal para formulários */
+        width: 100%;
+        padding: 3rem 3.5rem;
+        margin: 0 auto;
+    }
+
+    /* Grid de 2 colunas para distribuir melhor os campos */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* Campos que ocupam duas colunas */
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    /* Ajuste específico para o grupo do número da rifa */
+    .numero-group {
+        grid-column: 1 / -1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    /* Container dos botões otimizado */
+    .button-group {
+        grid-column: 1 / -1;
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        max-width: 400px;
+        margin: 1.5rem auto 0;
+    }
+
+    #submit-btn,
+    #clear-btn {
+        flex: 1;
+        min-width: 160px;
+    }
+}
+
+/* === LAYOUT PARA DESKTOP GRANDE (1024px+) === */
+@media screen and (min-width: 1024px) {
+    .admin-container {
+        max-width: 900px;
+        padding: 3.5rem 4rem;
+    }
+
+    .form-grid {
+        gap: 2.5rem;
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        max-width: 500px;
+        margin: 2rem auto 0;
+    }
+
+    #submit-btn,
+    #clear-btn {
+        flex: 1;
+        min-width: 200px;
+        max-width: 220px;
+    }
+}
+
+/* === LAYOUT PARA TELAS MUITO GRANDES (1440px+) === */
+@media screen and (min-width: 1440px) {
+    .admin-container {
+        max-width: 1000px;
+        padding: 4rem 5rem;
+    }
+
+    .form-grid {
+        gap: 3rem;
+    }
+
+    /* Em telas muito grandes, podemos usar 3 colunas */
+    .form-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .numero-group {
+        grid-column: 2 / 3; /* Centraliza o número da rifa */
+        justify-self: center;
+    }
+
+    .button-group {
+        grid-column: 1 / -1;
+        max-width: 500px;
+    }
+}
+
+/* --- Cabeçalho --- */
 h2 {
     text-align: center;
     margin-bottom: 2rem;
     font-size: 1.75rem;
-    color: #1c2b4e;
+    font-weight: 700;
+    color: var(--gray-900);
+    position: relative;
 }
 
-/* --- Grupos de Inputs e Labels --- */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+/* Ajustes do cabeçalho para desktop */
+@media screen and (min-width: 768px) {
+    h2 {
+        font-size: 2.25rem;
+        margin-bottom: 3rem;
+    }
+    
+    h2::after {
+        width: 80px;
+        height: 4px;
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: row; /* Isso aqui garante lado a lado */
+        gap: 1.5rem;
+        justify-content: center;
+        max-width: 400px;
+        margin: 1.5rem auto 0;
+    }
+
+    #submit-btn,
+    #clear-btn {
+        flex: 1;
+        min-width: 160px;
+    }
+}
+
+/* --- Grupos de Inputs --- */
 .input-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+    position: relative;
 }
 
 .input-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #555;
+    color: var(--gray-700);
     font-size: 0.9rem;
+    transition: color 0.2s ease;
 }
 
-/* --- Estilo dos Inputs e Select (A Mágica) --- */
+/* Ajustes para desktop */
+@media screen and (min-width: 768px) {
+    .input-group {
+        margin-bottom: 0; /* Remove margin-bottom pois o grid controla o espaçamento */
+    }
+    
+    .input-group label {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* --- Estilos dos Inputs --- */
 input[type="text"],
 input[type="tel"],
 input[type="email"],
@@ -55,106 +265,273 @@ input[type="date"],
 input[type="number"],
 select {
     width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius);
     font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: white;
+    transition: all 0.3s ease;
+    font-family: inherit;
 }
 
-/* Efeito de foco para indicar ao usuário onde ele está digitando */
+/* Ajustes de Input para Desktop */
+@media screen and (min-width: 768px) {
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="date"],
+    input[type="number"],
+    select {
+        padding: 1rem 1.25rem;
+        font-size: 1.05rem;
+        border-radius: 10px;
+    }
+}
+
+input:hover,
+select:hover {
+    border-color: var(--gray-300);
+}
+
 input:focus,
 select:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    transform: translateY(-1px);
 }
 
-/* --- Botão Principal --- */
-#submit-btn {
-    width: 100%;
-    padding: 0.9rem;
+/* --- Container do Número da Rifa --- */
+.numero-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.numero-input-wrapper input {
+    flex: 1;
+}
+
+#numero-status {
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    min-width: 80px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Ajustes para Desktop */
+@media screen and (min-width: 768px) {
+    .numero-input-wrapper {
+        gap: 1rem;
+    }
+    
+    #numero-status {
+        font-size: 0.9rem;
+        min-width: 90px;
+        padding: 0.375rem 0.75rem;
+    }
+}
+
+/* --- Botões --- */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+#submit-btn,
+#clear-btn {
+    padding: 1rem 1.5rem;
     border: none;
-    border-radius: 6px;
-    background-color: #007bff;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ajustes de Botão para Desktop */
+@media screen and (min-width: 768px) {
+    #submit-btn,
+    #clear-btn {
+        padding: 1.125rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+}
+
+#submit-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    box-shadow: var(--shadow);
 }
 
 #submit-btn:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
 }
 
 #submit-btn:active {
-    transform: scale(0.97); /* Efeito de clique */
+    transform: translateY(0);
+}
+
+#submit-btn:disabled {
+    background: var(--gray-300);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#clear-btn {
+    background: white;
+    color: var(--gray-700);
+    border: 2px solid var(--gray-200);
+    transition: all 0.3s ease;
+}
+
+#clear-btn:hover {
+    border-color: var(--gray-300);
+    background: var(--gray-50);
+    transform: translateY(-1px);
 }
 
 /* --- Mensagens de Status --- */
 #status-message {
     margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: var(--radius);
     font-weight: 500;
     text-align: center;
-    height: 1.2em;
     font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+/* Ajustes de Status para Desktop */
+@media screen and (min-width: 768px) {
+    #status-message {
+        margin-top: 2rem;
+        padding: 1.25rem;
+        font-size: 1rem;
+        border-radius: 10px;
+        grid-column: 1 / -1;
+    }
 }
 
 .status-success {
-    color: #28a745; /* Verde para sucesso */
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    border-color: rgba(16, 185, 129, 0.2);
 }
 
 .status-error {
-    color: #dc3545; /* Vermelho para erro */
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+    border-color: rgba(239, 68, 68, 0.2);
 }
 
-/* --- Estilos para o novo seletor de número --- */
-.numero-input-wrapper {
-    display: flex;
-    align-items: center;
+/* --- Estados de Input --- */
+input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--error);
 }
 
-.numero-input-wrapper input {
-    flex-grow: 1; /* Faz o input ocupar o espaço disponível */
+input:valid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--success);
 }
 
-#numero-status {
-    margin-left: 1rem;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-/* Remove as setas de incremento/decremento do input de número */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+/* --- Remove setas do input number --- */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type=number] {
-  -moz-appearance: textfield; /* Correção para Firefox */
-  appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
-#clear-btn {
-    width: 100%;
-    margin-top: 15px;
-    padding: 0.9rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #db0f01;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+/* --- Loading State --- */
+.loading {
+    position: relative;
+    pointer-events: none;
 }
 
-#clear-btn:hover {
-    background-color: #db1001d7;
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
-#clear-btn:active {
-    transform: scale(0.97); /* Efeito de clique */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
+
+/* --- Responsividade Mobile --- */
+@media (max-width: 767px) {
+    .admin-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .button-group {
+        gap: 0.5rem;
+    }
+    
+    #submit-btn,
+    #clear-btn {
+        padding: 0.875rem 1.25rem;
+    }
+}
+
+/* --- Animações --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.input-group {
+    animation: fadeIn 0.6s ease-out backwards;
+}
+
+.input-group:nth-child(1) { animation-delay: 0.1s; }
+.input-group:nth-child(2) { animation-delay: 0.2s; }
+.input-group:nth-child(3) { animation-delay: 0.3s; }
+.input-group:nth-child(4) { animation-delay: 0.4s; }
+.input-group:nth-child(5) { animation-delay: 0.5s; }
+.input-group:nth-child(6) { animation-delay: 0.6s; }
