@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Cole a URL do seu deploy aqui
-    const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqTrqU5MCrQAgVYA5YfmhOYoj_a8PqS8VyMae4RZ_UlkCKnYdUjr8Xkniv9x9OybTu/exec';
+    const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNfYXXPv0eVNy9uWnj0QRj2KaqmTKjgYghE-tAsArHhdefBvpHswpSMAC4JPEdcSbC/exec';
 
     // --- Elementos do DOM ---
     const modal = document.getElementById('modal-consulta');

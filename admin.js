@@ -1,4 +1,4 @@
-const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzqTrqU5MCrQAgVYA5YfmhOYoj_a8PqS8VyMae4RZ_UlkCKnYdUjr8Xkniv9x9OybTu/exec';
+const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNfYXXPv0eVNy9uWnj0QRj2KaqmTKjgYghE-tAsArHhdefBvpHswpSMAC4JPEdcSbC/exec';
 
 const numeroInput = document.getElementById('numero_rifa');
 const numeroStatus = document.getElementById('numero-status');
@@ -9,7 +9,7 @@ const telefoneInput = document.getElementById('telefone');
 const clearButton = document.getElementById('clear-btn');
 const vendedorInput = document.getElementById('vendedor'); // Nova variável
 
-const TOTAL_NUMEROS = 1000;
+const TOTAL_NUMEROS = 500;
 let numerosUsados = [];
 
 clearButton.addEventListener('click', () => {
