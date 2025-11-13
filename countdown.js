@@ -5,7 +5,7 @@
 const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNfYXXPv0eVNy9uWnj0QRj2KaqmTKjgYghE-tAsArHhdefBvpHswpSMAC4JPEdcSbC/exec';
 
 
-const dataSorteio = new Date(2025, 11, 4, 15, 0, 0);
+const dataSorteio = new Date(2025, 11, 1, 15, 0, 0);
 
 // --- Seleciona os elementos no HTML ---
 const diasEl = document.getElementById('days');
