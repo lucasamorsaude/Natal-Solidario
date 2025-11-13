@@ -1,0 +1,221 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('image.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    font-family: 'Poppins', sans-serif;
+    background-color: #1c2b4e; /* Fundo azul escuro */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 1rem;
+
+    &::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* Preto com 70% de transparência */
+        z-index: -1; /* Coloca essa camada atrás do conteúdo */
+    }
+}
+
+h1 {
+    margin-top: 15px;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    min-width: 150px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.time-block span {
+    font-size: 6rem; /* BEM GRANDÃO */
+    font-weight: 700;
+    line-height: 1;
+}
+
+.time-block small {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.btn-consultar {
+    margin-top: 4rem;
+    display: inline-block;
+    background-color: #28a745; /* Verde */
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-consultar:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+
+/* --- Estilos para o Modal de Consulta --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    color: #333;
+    padding: 2.5rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: left;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.modal-content p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+/* Estilos para o formulário dentro do modal */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+#btn-buscar {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Área de Resultado */
+#resultado-consulta {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f0f2f5;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.progress-container {
+    width: 90%;
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    margin: 3rem auto;
+    position: relative; /* Importante para o texto */
+    height: 40px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; /* Começa em 0 e o JS atualiza */
+    background: linear-gradient(90deg, #16a085, #2ecc71);
+    border-radius: 50px;
+    transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Animação suave */
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .time-block span {
+        font-size: 4rem;
+    }
+    .time-block {
+        min-width: 120px;
+        padding: 1rem 1.5rem;
+    }
+}
